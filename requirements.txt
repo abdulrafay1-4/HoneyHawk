@@ -1,0 +1,5 @@
+# HoneyHawk Requirements
+watchdog>=2.1.0
+PyYAML>=6.0
+requests>=2.28.0
+colorama>=0.4.4

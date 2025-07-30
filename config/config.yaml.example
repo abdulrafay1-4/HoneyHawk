@@ -1,0 +1,110 @@
+# HoneyHawk Configuration Template
+# Copy this file to config.yaml and customize as needed
+
+honeyhawk:
+  version: "1.0.0"
+  name: "HoneyHawk Canary Monitor"
+  description: "Cross-platform canary credential monitoring system"
+
+# Token generation settings
+tokens:
+  generate_aws: true
+  generate_ssh: true
+  generate_database: true
+  generate_api: true
+  regenerate_interval_days: 30
+  
+  # Customize token file names and locations
+  custom_locations:
+    aws_files:
+      - ".aws/credentials"
+      - ".aws/fake_credentials"
+      - "aws.txt"
+      - ".env_aws"
+    ssh_files:
+      - ".ssh/id_rsa"
+      - ".ssh/fake_id_rsa"
+      - "server_key.pem"
+      - "backup_key"
+    api_files:
+      - ".env"
+      - ".env.local"
+      - "api_keys.txt"
+      - "config/secrets.env"
+
+# Monitoring configuration
+monitoring:
+  file_watch_enabled: true
+  network_monitor_enabled: true
+  ssh_honeypot_port: 2222
+  
+  # File monitoring options
+  file_watch:
+    recursive: true
+    ignore_patterns:
+      - "*.pyc"
+      - "__pycache__"
+      - ".git"
+    
+  # Network monitoring options
+  network_monitor:
+    enable_ssh_honeypot: true
+    enable_dns_monitor: false
+    honeypot_banner: "SSH-2.0-OpenSSH_8.9"
+
+# Alerting configuration
+alerting:
+  log_to_file: true
+  system_notifications: true
+  console_alerts: true
+  
+  # External alerting (configure with your actual webhooks/tokens)
+  email_alerts: false
+  email_config:
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: "your-email@gmail.com"
+    password: "your-app-password"  # Use app password, not real password
+    
+  discord_webhook: ""  # Add your Discord webhook URL here
+  slack_webhook: ""    # Add your Slack webhook URL here
+  
+  # Alert thresholds
+  alert_cooldown_seconds: 5  # Prevent spam alerts
+  high_severity_events:
+    - "file_opened"
+    - "ssh_connection"
+    - "credential_usage"
+
+# Logging configuration
+logging:
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  max_log_size_mb: 100
+  rotate_logs: true
+  log_retention_days: 30
+  
+  # Log file locations (relative to project root)
+  log_files:
+    alerts: "logs/alerts.log"
+    activity: "logs/activity.log"
+    errors: "logs/errors.log"
+
+# Advanced options
+advanced:
+  # Stealth mode - reduces logging verbosity
+  stealth_mode: false
+  
+  # Automatically regenerate tokens periodically
+  auto_regenerate: false
+  
+  # Custom file extensions to monitor
+  monitor_extensions:
+    - ".env"
+    - ".ini"
+    - ".conf"
+    - ".config"
+    - ".pem"
+    - ".key"
+    - ".crt"
+    - ".p12"
+    - ".pfx"

@@ -1,0 +1,33 @@
+# HoneyHawk Configuration File
+
+honeyhawk:
+  version: "1.0.0"
+  name: "HoneyHawk Canary Monitor"
+
+# Token generation settings
+tokens:
+  generate_aws: true
+  generate_ssh: true
+  generate_database: true
+  generate_api: true
+  regenerate_interval_days: 30
+
+# Monitoring configuration
+monitoring:
+  file_watch_enabled: true
+  network_monitor_enabled: true
+  ssh_honeypot_port: 2222
+
+# Alerting configuration
+alerting:
+  log_to_file: true
+  system_notifications: true
+  email_alerts: false
+  discord_webhook: ""
+  slack_webhook: ""
+
+# Logging configuration
+logging:
+  log_level: "INFO"
+  max_log_size_mb: 100
+  rotate_logs: true
